@@ -4,7 +4,7 @@ WORKDIR /app
 
 ENV MIX_ENV=prod
 
-RUN apk add --no-cache build-base git nodejs npm
+RUN apk add --no-cache build-base git nodejs npm ca-certificates
 
 COPY mix.exs mix.lock ./
 RUN mix local.hex --force && \
