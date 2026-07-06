@@ -1,4 +1,5 @@
 FROM elixir:1.18-alpine AS builder
+RUN apk add --no-cache git
 ENV MIX_ENV=prod
 WORKDIR /app
 COPY mix.exs mix.lock ./
