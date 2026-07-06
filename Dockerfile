@@ -10,13 +10,12 @@ COPY priv ./priv
 COPY assets ./assets
 RUN mix compile && mix assets.deploy && mix release
 
-FROM elixir:1.18-slim
+FROM elixir:1.18-alpine
 ENV LANG=C.UTF-8
 WORKDIR /app
-RUN apt-get update && apt-get install -y --no-install-recommends openssl && \
-    rm -rf /var/lib/apt/lists/* && \
-    groupadd -g 1001 app && \
-    useradd -u 1001 -g app app
+RUN apk add --no-cache openssl && \
+    addgroup -g 1001 app && \
+    adduser -u 1001 -G app -D app
 COPY --from=builder /app/_build/prod/rel/elixir_phoenix_liveview ./
 EXPOSE 8080
 USER 1001
