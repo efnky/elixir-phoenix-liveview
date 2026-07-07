@@ -10,7 +10,7 @@ COPY priv ./priv
 COPY assets ./assets
 RUN mix compile && mix assets.deploy && mix release
 
-FROM alpine:3.21
+FROM elixir:1.18-alpine
 ENV LANG=C.UTF-8
 WORKDIR /app
 RUN apk add --no-cache openssl ncurses-libs libstdc++ libgcc && \
